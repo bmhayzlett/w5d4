@@ -25,4 +25,44 @@ class Question < ActiveRecord::Base
   has_many :responses,
     through: :answer_choices,
     source: :responses
+
+  # Returns hash of choices and counts of answers to those choices
+  def results
+    results = Hash.new
+    self.answer_choices.each do |answer_choice|
+      results[answer_choice.answer_text] = answer_choice.responses.count
+    end
+    results
+  end
+
+  def results_better
+    results = Hash.new
+    answer_choices = self.answer_choices.includes(:responses)
+    answer_choices.each do |answer_choice|
+      results[answer_choice.answer_text] = answer_choice.responses.length
+    end
+    results
+  end
+
+  # def results_best
+  #   AnswerChoice.find_by_sql(<<-SQL)
+  #     SELECT answer_choices.*, COUNT(responses.id)
+  #     FROM answer_choices
+  #     JOIN responses ON answer_choices.id = responses.answer_choice_id
+  #     GROUP BY answer_choices.id
+  #     HAVING 1 = answer_choices.question_id
+  #     SQL
+  # end
+
+  def results_best
+    results = Hash.new
+    answer_choices = self.answer_choices
+        .select("answer_choices.*, COUNT(responses.id) AS response_count")
+        .joins(:responses)
+        .group("answer_choice_id")
+    answer_choices.each do |answer_choice|
+      results[answer_choice.answer_text] = answer_choice.responses.length
+    end
+    results
+  end
 end
