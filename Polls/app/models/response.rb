@@ -10,4 +10,8 @@ class Response < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :responder_id,
     class_name: 'User'
+
+  has_one :question,
+    through: :answer_choice,
+    source: :question
 end
