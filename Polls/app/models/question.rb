@@ -45,12 +45,12 @@ class Question < ActiveRecord::Base
   end
 
   # def results_best
-  #   AnswerChoice.find_by_sql(<<-SQL)
+  #   AnswerChoice.find_by_sql(<<-SQL, self.id)
   #     SELECT answer_choices.*, COUNT(responses.id)
   #     FROM answer_choices
   #     JOIN responses ON answer_choices.id = responses.answer_choice_id
+  #     WHERE answer_choices.question_id = ?
   #     GROUP BY answer_choices.id
-  #     HAVING 1 = answer_choices.question_id
   #     SQL
   # end
 
@@ -58,10 +58,10 @@ class Question < ActiveRecord::Base
     results = Hash.new
     answer_choices = self.answer_choices
         .select("answer_choices.*, COUNT(responses.id) AS response_count")
-        .joins(:responses)
+        .joins("LEFT OUTER JOIN responses ON answer_choices.id = responses.answer_choice_id")
         .group("answer_choice_id")
     answer_choices.each do |answer_choice|
-      results[answer_choice.answer_text] = answer_choice.responses.length
+      results[answer_choice.answer_text] = answer_choice.response_count
     end
     results
   end
