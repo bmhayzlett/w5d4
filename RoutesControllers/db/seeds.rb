@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create!(:username => 'Kevin')
+User.create!(:username => 'Pat')
+User.create!(:username => 'Jane')
+
+Contact.create!(:email => 'John@gmail.com', :name => 'John', :user_id => 3)
+Contact.create!(:email => 'Jeff@gmail.com', :name => 'Jeff', :user_id => 1)
+Contact.create!(:email => 'Kyle@gmail.com', :name => 'Kyle', :user_id => 1)
+Contact.create!(:email => 'Jeff@gmail.com', :name => 'Jeff', :user_id => 2)
+
+
+ContactShare.create!(:user_id => 1, :contact_id => 2)
+ContactShare.create!(:user_id => 1, :contact_id => 3)
+ContactShare.create!(:user_id => 2, :contact_id => 3)
