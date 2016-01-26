@@ -1,0 +1,34 @@
+<h1>Edit a cat motherfucker!</h1>
+
+<ul>
+  <% @cat.errors.full_messages.each do |err_msg| %>
+    <li><%= err_msg %></li>
+  <% end %>
+</ul>
+<form class="cats" action="/cats" _method="put">
+  <label for="sex">Name:</label>
+  <input type="text" name="cat[name]" value="<%= @cat.name %>"><br/>
+  <label for="sex">Sex:</label>
+  <input type="radio" name="cat[sex]" value="M" <%= @cat.sex.nil? || @cat.sex == "M" ? "checked" : "" %> >M
+  <input type="radio" name="cat[sex]" value="F" <%= @cat.sex == "F" ? "checked" : "" %>>F<br/>
+  <select class="dropdown" name="cat[color]">
+    <option <%= @cat.color.nil? ? "selected = 'true'" : "" %> selected="true" disabled="true" >Select a Color</option>
+    <option <%= @cat.color == "Italian Sky Blue" ? "selected = 'true'" : "" %> value="Italian Sky Blue">Italian Sky Blue</option>
+    <option <%= @cat.color == "Japanese Indigo" ? "selected = 'true'" : "" %> value="Japanese Indigo">Japanese Indigo</option>
+    <option <%= @cat.color == "Islamic Green" ? "selected = 'true'" : "" %> value="Islamic Green">Islamic Green</option>
+    <option <%= @cat.color == "Fuzzy Wuzzy" ? "selected = 'true'" : "" %> value="Fuzzy Wuzzy">Fuzzy Wuzzy</option>
+    <option <%= @cat.color == "Dark Gunmetal" ? "selected = 'true'" : "" %> value="Dark Gunmetal">Dark Gunmetal</option>
+    <option <%= @cat.color == "Orioles Orange" ? "selected = 'true'" : "" %> value="Orioles Orange">Orioles Orange</option>
+    <option <%= @cat.color == "Pale Robin Egg Blue" ? "selected = 'true'" : "" %> value="Pale Robin Egg Blue">Pale Robin Egg Blue</option>
+    <option <%= @cat.color == "Permanent Geranium Lake" ? "selected = 'true'" : "" %> value="Permanent Geranium Lake">Permanent Geranium Lake</option>
+    <option <%= @cat.color == "Phthalo Blue" ? "selected = 'true'" : "" %> value="Phthalo Blue">Phthalo Blue</option>
+    <option <%= @cat.color == "Zomp" ? "selected = 'true'" : "" %> value="Zomp">Zomp</option>
+    <option <%= @cat.color == "Zaffre" ? "selected = 'true'" : "" %> value="Zaffre">Zaffre</option>
+    <option <%= @cat.color == "Ultramarine Blue" ? "selected = 'true'" : "" %> value="Ultramarine Blue">Ultramarine Blue</option>
+  </select><br/>
+  <label for="birth_date">Date:</label>
+  <input type="date" name="cat[birth_date]" value="<%= @cat.birth_date %>" max ="<%= Date.today.to_s %>"><br/>
+  <label for="description">Description of your cat!</label><br/>
+  <textarea name="cat[description]" rows="8" cols="40"><%= @cat.description %></textarea><br/>
+  <%= button_to "Make Cat", action:'update' %>
+</form>
