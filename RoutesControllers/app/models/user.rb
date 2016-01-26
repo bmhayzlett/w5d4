@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  username   :string           not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class User < ActiveRecord::Base
   validates :username, uniqueness: true, presence: true
 
@@ -16,4 +26,16 @@ class User < ActiveRecord::Base
   has_many :shared_contacts,
     through: :contact_shares,
     source: :contact
+
+  has_many :authored_comments,
+    primary_key: :id,
+    foreign_key: :author_id,
+    class_name: 'Comment'
+
+  has_many :comments,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: 'Comment'
+
+
 end

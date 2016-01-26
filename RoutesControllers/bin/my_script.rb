@@ -6,7 +6,7 @@ def create_user
     scheme: 'http',
     host: 'localhost',
     port: 3000,
-    path: '/users.json'
+    path: '/users/1/contacts.json'
   ).to_s
 
 
@@ -15,7 +15,7 @@ def create_user
   begin
     puts RestClient.post(
       url,
-      { user: { name: "Donald Trump", email: 'president@gmail.gov' } }
+      { contact: { name: "Donald Trump", email: 'president@gmail.gov' } }
     )
   rescue
     puts 'Rescued'

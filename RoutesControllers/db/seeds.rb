@@ -19,3 +19,8 @@ Contact.create!(:email => 'Jeff@gmail.com', :name => 'Jeff', :user_id => 2)
 ContactShare.create!(:user_id => 1, :contact_id => 2)
 ContactShare.create!(:user_id => 1, :contact_id => 3)
 ContactShare.create!(:user_id => 2, :contact_id => 3)
+
+Comment.create!(:author_id => 1, :user_id => 2, :body => "a body" )
+Comment.create!(:author_id => 1, :contact_id => 1, :body => "a body2" )
+Comment.create!(:author_id => 2, :contact_id => 1, :body => "a bodygsdfg" )
+Comment.create!(:author_id => 3, :contact_id => 2, :body => "a bodyhgtjhrty" )

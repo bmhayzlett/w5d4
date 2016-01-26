@@ -1,7 +1,8 @@
 class ContactsController < ApplicationController
 
   def index
-    render json: Contact.all
+    @user = User.find(params[:user_id])
+    render json: ["CONTACTS:", @user.contacts, "SHARED CONTACTS:", @user.shared_contacts]
   end
 
   def show
@@ -21,7 +22,8 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(contact_params)
+    @user = User.find(params[:user_id])
+    @contact = @user.contacts.new(contact_params)
     if @contact.save
       render json: @contact
     else
