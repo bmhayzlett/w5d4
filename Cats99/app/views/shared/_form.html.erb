@@ -13,7 +13,7 @@
   <input type="radio" name="cat[sex]" value="M" <%= cat.sex.nil? || cat.sex == "M" ? "checked" : "" %> >M
   <input type="radio" name="cat[sex]" value="F" <%= cat.sex == "F" ? "checked" : "" %>>F<br/>
   <select class="dropdown" name="cat[color]">
-    <option <%= cat.color.nil? ? "selected = 'true'" : "" %> selected="true" disabled="true" >Select a Color</option>
+    <option <%= cat.color.nil? ? "selected = 'true'" : "" %> disabled="true" >Select a Color</option>
     <option <%= cat.color == "Italian Sky Blue" ? "selected = true" : "" %> value="Italian Sky Blue">Italian Sky Blue</option>
     <option <%= cat.color == "Japanese Indigo" ? "selected = true" : "" %> value="Japanese Indigo">Japanese Indigo</option>
     <option <%= cat.color == "Islamic Green" ? "selected = true" : "" %> value="Islamic Green">Islamic Green</option>

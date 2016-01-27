@@ -1,21 +1,9 @@
-class CatRentalRequestRentalRequestsController < ApplicationController
-  def index
-    @cat_rental_requests = CatRentalRequest.all
-    render :index
-  end
-
-  def show
-    if @cat_rental_request = CatRentalRequest.find_by(id: params[:id])
-      render :show
-    else
-      redirect_to cat_rental_requests_url
-    end
-  end
+class CatRentalRequestsController < ApplicationController
 
   def create
     @cat_rental_request = CatRentalRequest.new(cat_rental_request_params)
     if @cat_rental_request.save
-      redirect_to cat_rental_request_url(@cat_rental_request)
+      redirect_to cat_url(Cat.find_by(id: @cat_rental_request.cat_id))
     else
       render :new
     end
@@ -29,7 +17,7 @@ class CatRentalRequestRentalRequestsController < ApplicationController
   def update
     @cat_rental_request = CatRentalRequest.find_by(id: params[:id])
     if @cat_rental_request.update(cat_rental_request_params)
-      redirect_to cat_rental_request_url(@cat_rental_request)
+      redirect_to cat_url(Cat.find_by(id: @cat_rental_request.cat_id))
     else
       render :edit
     end
@@ -39,18 +27,27 @@ class CatRentalRequestRentalRequestsController < ApplicationController
     @cat_rental_request = CatRentalRequest.find_by(id: params[:id])
     if @cat_rental_request
       render :edit
-    else
-      render :index
     end
   end
 
   def destroy
     @cat_rental_request = CatRentalRequest.find_by(id: params[:id])
+    cat_id = @cat_rental_request.nil? ? nil : @cat_rental_request.cat_id
     if @cat_rental_request.delete
-      index
+      redirect_to cat_url(Cat.find_by(id: cat_id))
     else
-      render :show
+      redirect_to cats_url
     end
+  end
+
+  def approve
+    CatRentalRequest.find_by(id: params[:id]).approve! unless CatRentalRequest.find_by(id: params[:id]).nil?
+    redirect_to cat_url(Cat.find_by(id: CatRentalRequest.find_by(id: params[:id]).cat_id))
+  end
+
+  def deny
+    CatRentalRequest.find_by(id: params[:id]).deny! unless CatRentalRequest.find_by(id: params[:id]).nil?
+    redirect_to cat_url(Cat.find_by(id: CatRentalRequest.find_by(id: params[:id]).cat_id))
   end
 
   private

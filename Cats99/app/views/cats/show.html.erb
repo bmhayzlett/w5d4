@@ -9,3 +9,17 @@
 
 <%= button_to "Edit Cat", edit_cat_url(@cat), method: :get %>
 <%= button_to "Delete Cat", cat_url(@cat), method: :delete %>
+
+<h2>Rental Requests:</h2>
+<% @cat.cat_rental_requests.order(:start_date).each do |request| %>
+  <span> <%= request.start_date %> </span><br/>
+  <span> <%= request.end_date %> </span><br/>
+  <span> <%= request.status %> </span><br/>
+  <% if request.status == "PENDING" %>
+    <%= button_to "Approve", approve_cat_rental_request_url(request), method: :get %><br/>
+    <%= button_to "Deny", deny_cat_rental_request_url(request), method: :get %><br/>
+  <% end %>
+  <br/>
+<% end %>
+
+<%= button_to "Rent This Cat", new_cat_rental_request_url, method: :get %>
