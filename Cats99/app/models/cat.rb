@@ -8,4 +8,5 @@ class Cat < ActiveRecord::Base
     days_diff.to_i / 365
   end
 
+  has_many :cat_rental_requests
 end

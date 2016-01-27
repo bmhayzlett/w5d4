@@ -1,4 +1,6 @@
 <div class="cat">
+  <%= button_to "New Cat", new_cat_url, method: :get %>
+
   <% @cats.each do |cat| %>
     <h1><%= cat.name %></h1>
     <h2>Color: <%= cat.color %></h2>
