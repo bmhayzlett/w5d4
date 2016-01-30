@@ -1,0 +1,8 @@
+<h1>Log in!</h1>
+
+<%= render "shared/notifications", user: @user %>
+<%= render "form", user: @user %>
+
+<p>
+  Don't have an account? Sign in <%= link_to "Here",  new_user_url %>
+</p>

@@ -1,0 +1,14 @@
+<% if flash[:errors] %>
+  <ul class="errors_notifications">
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% if flash[:success] %>
+  <ul class="success_notifications">
+    <% flash[:success].each do |success| %>
+      <li><%= success %></li>
+    <% end %>
+  </ul>
+<% end %>
