@@ -26,4 +26,12 @@ class ApplicationController < ActionController::Base
     redirect_to user_url(current_user) if current_user
   end
 
+  def require_moderator
+    current_user.id == current_sub.id
+  end
+
+  def current_sub
+    @sub ||= Sub.find_by_id(params[:id])
+  end
+
 end

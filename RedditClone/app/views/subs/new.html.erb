@@ -1,0 +1,15 @@
+<% action = (sub.persisted? ? sub_url(sub) : subs_url) %>
+<% method = (sub.persisted? ? :patch : :post) %>
+
+<form class="" action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="title">Title</label>
+  <input type="text" name="sub[title]" value="<%= sub.title %>">
+
+  <label for="description">description</label>
+  <input type="description" name="sub[description]" value="<%= sub.description %>">
+
+  <input type="submit" name="Submit" value="Submit">
+</form>
