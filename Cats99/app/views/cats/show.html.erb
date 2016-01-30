@@ -1,0 +1,25 @@
+<h1><%= @cat.name %></h1>
+<h2>Color: <%= @cat.color %></h2>
+<h2>Sex: <%= @cat.sex %></h2>
+<h2>Age: <%= @cat.age %></h2>
+
+<p>Description: <%= @cat.description %></p>
+<br/>
+<img src="http://breadedcat.com/wp-content/uploads/2012/02/cat-breading-tutorial-004.jpg" alt="All the cats" /><br/>
+
+<%= button_to "Edit Cat", edit_cat_url(@cat), method: :get %>
+<%= button_to "Delete Cat", cat_url(@cat), method: :delete %>
+
+<h2>Rental Requests:</h2>
+<% @cat.cat_rental_requests.order(:start_date).each do |request| %>
+  <span> <%= request.start_date %> </span><br/>
+  <span> <%= request.end_date %> </span><br/>
+  <span> <%= request.status %> </span><br/>
+  <% if request.status == "PENDING" %>
+    <%= button_to "Approve", approve_cat_rental_request_url(request), method: :get %><br/>
+    <%= button_to "Deny", deny_cat_rental_request_url(request), method: :get %><br/>
+  <% end %>
+  <br/>
+<% end %>
+
+<%= button_to "Rent This Cat", new_cat_rental_request_url, method: :get %>
