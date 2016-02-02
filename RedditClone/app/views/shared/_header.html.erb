@@ -1,0 +1,12 @@
+
+<% action = (current_user.nil? ? new_session_url : session_url) %>
+<% method = (current_user.nil? ? :get : :delete) %>
+<% button_value = (current_user.nil? ? 'Log In' : 'Log Out') %>
+
+<header>
+  <form style="float: right;" action="<%= action %>" method="post">
+    <input type="hidden" name="_method" value="<%= method %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" name="button" value="<%= button_value %>">
+  </form>
+</header>
