@@ -1,0 +1,18 @@
+<h1>Edit Goal</h1>
+
+<%= render 'shared/notifications' %>
+
+<form action="<%= goal_url %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>Title</label>
+    <input type="text" name="goal[title]" value="<%= @goal.title %>" id="title">
+  <label>Target Date</label>
+  <input type="date" name="goal[target_date]" value="<%= @goal.target_date %>" id="target_date">
+
+  <input type="checkbox" name="public" id="public" value="true" <%= @goal.public ? 'checked' : '' %>>
+  Public
+  <input type="checkbox" name="complete" id="complete" value="true" <%= @goal.complete ? 'checked' : '' %>>
+  Complete
+  <input type="submit" value="Edit Goal">
+</form>

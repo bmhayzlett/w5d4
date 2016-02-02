@@ -1,0 +1,14 @@
+<h1>New Goal</h1>
+
+<%= render 'shared/notifications' %>
+
+<form action="<%= goals_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>Title</label>
+    <input type="text" name="goal[title]" value="<%= @goal.title %>" id="title">
+  <label>Target Date</label>
+  <input type="date" name="goal[target_date]" value="<%= @goal.target_date %>" id="target_date">
+
+  <%= check_box_tag :public, checked = true %>Public
+  <input type="submit" value="Create Goal">
+</form>

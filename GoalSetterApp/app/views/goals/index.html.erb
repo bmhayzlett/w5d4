@@ -1,0 +1,8 @@
+<h1>Goals</h1>
+<ul>
+  <% @public_goals.each do |goal| %>
+    <li><%= goal.title %></li>
+    <li>Target: <%= goal.target_date %></li>
+    <li><%= goal.user.username %></li>
+  <% end %>
+</ul>

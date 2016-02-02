@@ -1,0 +1,14 @@
+<h1>Log In</h1>
+
+<%= render 'shared/notifications' %>
+
+<form action="<%= session_url %>" method="post">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<label>Username</label>
+<input type="text" name="user[username]" value="" id="username">
+<label>Password</label>
+  <input type="password" name="user[password]" value="" id="password">
+<input type="submit" value="Log In">
+</form>
+
+<a href="<%= new_user_url %>">Sign Up!</a>
